@@ -1,5 +1,5 @@
-# 💫 About Me:
-- 👋 Hi there! I’m Dhanush @Dhanush-R-git
+# 👋 Hi there!
+- 💫 I’m Dhanush @Dhanush-R-git
 - 👀 I’m interested in Data Analytics and AI
 - 🌱 I’m currently learning Large Language Models --> GPT, BERT, Llama models, Transformer Architectures
 - 🌱 I’m currently working on [MH-Analysis](https://github.com/Dhanush-R-git/MH-Analysis.git) project...
