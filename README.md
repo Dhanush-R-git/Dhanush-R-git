@@ -20,6 +20,13 @@
 ![](https://github-contributor-stats.vercel.app/api?username=Dhanush-R-git&limit=5&theme=github_dark&combine_all_yearly_contributions=true)
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=Dhanush-R-git&theme=github_dark&hide_border=false&include_all_commits=true&count_private=true&layout=compact)
 
+### 📊 Code Statistics
+
+<!-- cloc-start -->
+```text
+```
+<!-- cloc-end -->
+
 # 👀 Viewers count
 ![](https://komarev.com/ghpvc/?username=Dhanush-R-git&style=plastic)
 
