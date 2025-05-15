@@ -1,5 +1,9 @@
 name: Update LOC Table in README
 
+# 1️⃣ Grant the Actions runner write access to repo contents
+permissions:
+  contents: write
+
 on:
   push:
     branches: [ main ]
@@ -13,15 +17,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          # 2️⃣ Make sure the checkout step uses the token for pushing
+          persist-credentials: true
 
       - name: Install cloc
         run: sudo apt-get update && sudo apt-get install -y cloc
 
       - name: Generate cloc table
         run: |
-          # get the raw cloc output
           cloc . > loc_output.txt
-          # wrap it in a text code-block
           {
             echo '```text'
             cat loc_output.txt
@@ -30,13 +35,9 @@ jobs:
 
       - name: Update README.md with new cloc table
         run: |
-          # extract everything up to <!-- cloc-start -->
           awk '/<!-- cloc-start -->/{print; exit}' README.md > tmp.md
-          # append the freshly generated table
           cat loc_section.md >> tmp.md
-          # append the rest of README.md starting at <!-- cloc-end -->
           awk '/<!-- cloc-end -->/{found=1} found' README.md >> tmp.md
-          # replace the old README
           mv tmp.md README.md
 
       - name: Commit & push changes
@@ -46,3 +47,4 @@ jobs:
           git add README.md
           git commit -m "Auto-update cloc table" || echo "No changes to commit"
           git push
+
