@@ -2,41 +2,47 @@ name: Update LOC Table in README
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   schedule:
-    - cron: '0 0 * * 1' # Every Monday
+    - cron: '0 0 * * 1'  # every Monday at 00:00 UTC
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Install cloc
-        run: sudo apt install -y cloc
+        run: sudo apt-get update && sudo apt-get install -y cloc
 
       - name: Generate cloc table
         run: |
+          # get the raw cloc output
           cloc . > loc_output.txt
-          echo "### 📊 Code Statistics" > loc_section.md
-          echo "\`\`\`" >> loc_section.md
-          cat loc_output.txt >> loc_section.md
-          echo "\`\`\`" >> loc_section.md
+          # wrap it in a text code-block
+          {
+            echo '```text'
+            cat loc_output.txt
+            echo '```'
+          } > loc_section.md
 
-      - name: Update README.md
+      - name: Update README.md with new cloc table
         run: |
-          # Replace the section between <!-- cloc-start --> and <!-- cloc-end -->
-          awk '/<!-- cloc-start -->/{print;exit}' README.md > temp.md
-          cat loc_section.md >> temp.md
-          awk '/<!-- cloc-end -->/{found=1} found' README.md >> temp.md
-          mv temp.md README.md
+          # extract everything up to <!-- cloc-start -->
+          awk '/<!-- cloc-start -->/{print; exit}' README.md > tmp.md
+          # append the freshly generated table
+          cat loc_section.md >> tmp.md
+          # append the rest of README.md starting at <!-- cloc-end -->
+          awk '/<!-- cloc-end -->/{found=1} found' README.md >> tmp.md
+          # replace the old README
+          mv tmp.md README.md
 
-      - name: Commit and Push changes
+      - name: Commit & push changes
         run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
           git add README.md
-          git commit -m "Update cloc table in README" || echo "No changes"
+          git commit -m "Auto-update cloc table" || echo "No changes to commit"
           git push
