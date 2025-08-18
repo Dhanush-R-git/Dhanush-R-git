@@ -1,8 +1,8 @@
 # 👋 Hi there!
 - 💫 I’m Dhanush @Dhanush-R-git
 - 👀 I’m interested in Data Analytics and AI
-- 🌱 I’m currently learning Large Language Models --> GPT, BERT, Llama models, Transformer Architectures
-- 🌱 I’m currently working on [MH-Analysis](https://github.com/Dhanush-R-git/MH-Analysis.git) project...
+- 🌱 I’m currently learning Large Language Models --> GPT, Transformer Architectures, AI Agents and RAG systems
+- 🌱 I’m currently working on [MedSUM](https://github.com/Dhanush-R-git/MediSum.git), [MH-Analysis](https://github.com/Dhanush-R-git/MH-Analysis.git) projects...
 - 💞️ I’m looking to collaborate on ?
 - 📫 How to reach me [linkedin](https://www.linkedin.com/in/dhanush-ravi/)
 - 😄 Pronouns: He/Him
